@@ -1,3 +1,5 @@
+const baseColor = "rgb(39, 38, 38)";
+
 //select ccontainer
 const container = document.querySelector(".container");
 let size = 16;
@@ -32,7 +34,8 @@ inputButton.addEventListener("click", (e)=> {
 clearButton.addEventListener("click", (e) => {
     let pixels = Array.from(container.children);
     pixels.forEach((p) => {
-        p.style.backgroundColor = "rgb(39, 38, 38)";
+        p.style.backgroundColor = baseColor;
+        p.style.opacity = 1;
     })
 })
 
@@ -70,6 +73,8 @@ function createPixels(){
             //create element
             let newDiv = document.createElement("div");
             newDiv.classList.add("square");
+            newDiv.style.backgroundColor = baseColor;
+            newDiv.style.opacity = 1;
 
             //set size of equal fractions
             newDiv.style.width = `calc(100% / ${size})`;
@@ -77,12 +82,40 @@ function createPixels(){
             //add event listener to paint it black when hovered
             newDiv.addEventListener("mouseover", (e) => {
                 let currentPixel = e.target;
-                currentPixel.style.backgroundColor = "white";
+                
+
+                recolorPixel(currentPixel);
+                
             })
             container.appendChild(newDiv);      
         }
     }
-
-    //setSquareSize();
-
 }
+
+function recolorPixel(pixel){ 
+    let currentColor = pixel.style.backgroundColor ;
+    if (currentColor == baseColor){
+        pixel.style.backgroundColor = randomRGB();
+        pixel.style.opacity = 0.1;
+        
+    } else if (pixel.style.opacity < 1){
+        
+        pixel.style.opacity =  Number(pixel.style.opacity) + 0.1;
+        
+    }
+}
+
+function randomRGB(){
+    
+    let max = 255;
+    let randomValue = function (){
+        return Math.round(Math.random() * 255);
+    };
+    let r = randomValue();
+    let g = randomValue();
+    let b = randomValue();
+
+    return `rgb(${r}, ${g}, ${b})`;
+    
+}
+
