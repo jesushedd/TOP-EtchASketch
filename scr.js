@@ -7,7 +7,16 @@ for (let i = 0; i < side; i++) {
         let newDiv = document.createElement("div");
         newDiv.classList.add("square");
         container.appendChild(newDiv);
-        console.log("creado");
+        
     }
-    
 }
+
+//ad hover event to paint pixel square
+const pixels = Array.from( container.children);
+console.log(pixels);
+pixels.forEach((p) => {
+    p.addEventListener("mouseover", (e) => {
+        let currentPixel = e.target;
+        currentPixel.style.backgroundColor = "white";
+    })
+})
