@@ -39,6 +39,14 @@ clearButton.addEventListener("click", (e) => {
     })
 })
 
+//delegate event handler
+container.addEventListener("mouseover", (e) => {
+    let currentPixel = e.target;    
+
+    recolorPixel(currentPixel);
+    
+})
+
 
 
 //add event to paint a hovered square
@@ -80,13 +88,13 @@ function createPixels(){
             newDiv.style.width = `calc(100% / ${size})`;
 
             //add event listener to paint it black when hovered
-            newDiv.addEventListener("mouseover", (e) => {
+            /*newDiv.addEventListener("mouseover", (e) => {
                 let currentPixel = e.target;
                 
 
                 recolorPixel(currentPixel);
                 
-            })
+            })*/
             container.appendChild(newDiv);      
         }
     }
